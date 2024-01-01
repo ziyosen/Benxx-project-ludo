@@ -1,5 +1,5 @@
 'use client';
-import BoardLayout from '@/Components/BoardLayout';
+import BoardLayout from '@/components/BoardLayout';
 import { store } from '@/redux/store';
 import { Provider } from "react-redux";
 

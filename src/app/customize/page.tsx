@@ -1,6 +1,6 @@
 'use client';
-import CustomizePlayers from '@/Components/CustomizePlayers';
-import Footer from '@/Components/Footer';
+import CustomizePlayers from '@/components/CustomizePlayers';
+import Footer from '@/components/Footer';
 import { store } from '@/redux/store';
 import { Provider } from "react-redux";
 

@@ -1,6 +1,6 @@
 'use server';
-import Footer from '@/Components/Footer';
-import StaticLudoBoard from '@/Components/StaticLudoBoard';
+import Footer from '@/components/Footer';
+import StaticLudoBoard from '@/components/StaticLudoBoard';
 import Link from 'next/link';
 
 const Home = () => {

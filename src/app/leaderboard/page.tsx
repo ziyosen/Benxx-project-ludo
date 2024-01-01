@@ -1,6 +1,6 @@
 'use client';
-import Footer from '@/Components/Footer';
-import WinnerNames from '@/Components/WinnerNames';
+import Footer from '@/components/Footer';
+import WinnerNames from '@/components/WinnerNames';
 import { store } from '@/redux/store';
 import { Provider } from "react-redux";
 

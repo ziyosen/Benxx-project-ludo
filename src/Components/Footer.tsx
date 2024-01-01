@@ -1,5 +1,5 @@
 
-import StrangeQuarkIcon from '@/Assets/StrangeQuarkIcon';
+import StrangeQuarkIcon from '@/assets/StrangeQuarkIcon';
 import Link from 'next/link';
 import { FaXTwitter } from "react-icons/fa6";
 import { SiNextdotjs, SiRedux, SiGithub, SiLinkedin, SiInstagram } from "react-icons/si";
