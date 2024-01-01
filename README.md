@@ -2,6 +2,14 @@
 
 Ever yearn for the click-clack of dice and the echoes of laughter around the board? More than sixes and squares, it's a portal to simpler times. Reconnect with loved ones, rekindle friendly rivalries, and create new cherished memories. Roll the dice and let the board be your canvas, painting laughter onto the digital squares. Play Ludo now!
 
+# **Features**
+
+- Features an immersive player experience with an aesthetically pleasing user interface.
+- Implemented and enforced standard game rules governing token movement paths, ensuring an authentic experience while defining and managing safe zones on the board.
+- Incorporates robust logic to handle scenarios where multiple tokens overlap on the board
+- Utilizes Scalable Vector Graphics (SVG) to craft the game board, providing a scalable and visually crisp representation.
+- Introduces a pass button, providing players with manual control in specific edge cases or strategic situations, empowering them to make informed decisions within the dynamics of the game.
+
 ## **Tech Stack**
 
 This project leverages a powerful combination of modern technologies to deliver a seamless and engaging Ludo experience:
@@ -30,3 +38,10 @@ If you encounter any bugs or have suggestions for improvement, please don't hesi
 ## **License**
 
 This project is licensed under the [MIT License](LICENSE).
+
+#
+
+### HomePage
+![Ludo Image](https://i.ibb.co/bR4N1jW/image.png)
+### LudoBoard
+![Ludo Image](https://i.ibb.co/HgKBBWj/image.png)
