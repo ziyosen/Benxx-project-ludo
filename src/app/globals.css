@@ -2,26 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html,
+body {
+  height: 100vh;
+  margin: 0;
+  overflow: auto;
+  scroll-behavior: auto;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(0deg, #e79d9d, #799bd7);
+  background-size: cover;
+}
+
+.highlight {
+  stroke-width: 0.8;
+  stroke: black;
+  stroke-dasharray: 1.1;
+  stroke-dashoffset: 5.5;
+  animation: dashes 1s linear infinite;
+}
+
+@keyframes dashes {
+  to {
+    stroke-dashoffset: 1.1;
+  }
+}
+
+.highlight:hover {
+  cursor: pointer;
+  stroke: limegreen;
+}
+
+.ludoBoardHome {
+  animation: rotateBoard 30s linear infinite;
+}
+
+@keyframes rotateBoard {
+  0% {
+    transform: rotate(45deg);
+  }
+
+  100% {
+    transform: rotate(405deg);
+  }
 }
