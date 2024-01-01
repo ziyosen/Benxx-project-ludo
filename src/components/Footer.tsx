@@ -1,4 +1,3 @@
-
 import StrangeQuarkIcon from '@/assets/StrangeQuarkIcon';
 import Link from 'next/link';
 import { FaXTwitter } from "react-icons/fa6";
@@ -18,7 +17,7 @@ const Footer = () => {
         </div>
         <div className="flex items-center mx-auto">
           <p className="mx-2 my-2">Peek Behind the Squares:</p>
-          <p className="mx-2 my-2 text-2xl"><SiGithub /></p>
+          <p className="mx-2 my-2 text-2xl"><Link href="https://github.com/Strange-Quark-007/nextjs-redux-ludo"><SiGithub /></Link></p>
         </div>
         <div className="flex items-center mx-auto">
           <p className="mx-2 my-2">Socials:</p>
