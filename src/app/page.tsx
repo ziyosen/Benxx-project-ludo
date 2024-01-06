@@ -35,10 +35,9 @@ const Home = () => {
           <Link href="/customize" className="mt-auto text-gray-800 mb-16 text-4xl hover:text-gray-900">
             Play
           </Link>
-          <button className="mt-16 mb-auto text-slate-600 flex flex-col items-center" disabled>
+          <Link href="/multiplayer" className="mt-auto text-gray-800 mb-16 text-3xl hover:text-gray-900">
             Online Multiplayer
-            <span className="font-thin text-xl"> (Future Dream)</span>
-          </button>
+          </Link>
         </div>
       </main>
       <Footer />
