@@ -40,7 +40,7 @@ const Room: React.FC<roomProp> = ({ params }) => {
 
   useEffect(() => {
     if (!socket) {
-      setSocket(io("http://localhost:4000", {
+      setSocket(io("https://5eb28475-c4a8-41c1-8d08-28f4ed6d5e91-00-1vqejcytggvx4.janeway.replit.dev", {
         transports: ['websocket']
       }));
     }
