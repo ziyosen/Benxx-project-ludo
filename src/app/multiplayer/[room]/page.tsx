@@ -8,7 +8,7 @@ import { Socket } from 'socket.io-client';
 import { BiRename } from "react-icons/bi";
 
 interface roomProp {
-  [key: string]: {
+  params: {
     room: string;
   };
 };
