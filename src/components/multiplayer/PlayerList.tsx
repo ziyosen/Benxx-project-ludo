@@ -1,6 +1,10 @@
+interface UserItem {
+  socketId: string;
+  name: string;
+};
 
 interface PlayerListProps {
-  list: string[];
+  list: UserItem[];
 }
 
 const PlayerList: React.FC<PlayerListProps> = ({ list }) => {
@@ -8,9 +12,9 @@ const PlayerList: React.FC<PlayerListProps> = ({ list }) => {
     <>
       {
         list && list.map((item) =>
-          <div key={item}>
+          <div key={item.socketId}>
             <span className="m-2 p-2 h-5 text-xl font-mono">
-              {item}
+              {item.name}
             </span>
           </div>
         )
