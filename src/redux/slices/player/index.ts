@@ -12,7 +12,7 @@ interface Token {
 interface Player {
   id: string;
   name: string;
-  icon: string;
+  socketId: string;
   isPlaying: boolean;
   tokens: Token[];
 }
@@ -24,7 +24,7 @@ const playerState: PlayerState = [
   {
     "id": "P1",
     "name": "Player 1",
-    "icon": '',
+    "socketId": '',
     "isPlaying": true,
     "tokens": [
       { "id": "P11", "px": 20, "py": 110, "locationStatus": "spawn", "boardSquareId": "spawn11" },
@@ -36,7 +36,7 @@ const playerState: PlayerState = [
   {
     "id": "P2",
     "name": "Player 2",
-    "icon": '',
+    "socketId": '',
     "isPlaying": true,
     "tokens": [
       { "id": "P21", "px": 20, "py": 20, "locationStatus": "spawn", "boardSquareId": "spawn21" },
@@ -48,7 +48,7 @@ const playerState: PlayerState = [
   {
     "id": "P3",
     "name": "Player 3",
-    "icon": '',
+    "socketId": '',
     "isPlaying": true,
     "tokens": [
       { "id": "P31", "px": 110, "py": 20, "locationStatus": "spawn", "boardSquareId": "spawn31" },
@@ -60,7 +60,7 @@ const playerState: PlayerState = [
   {
     "id": "P4",
     "name": "Player 4",
-    "icon": '',
+    "socketId": '',
     "isPlaying": true,
     "tokens": [
       { "id": "P41", "px": 110, "py": 110, "locationStatus": "spawn", "boardSquareId": "spawn41" },
@@ -77,10 +77,14 @@ const playerSlice = createSlice({
   reducers: {
     setPlayers: (state, action) => {
       state[0].name = action.payload["P1"]?.name;
+      state[0].socketId = action.payload["P1"]?.socketId ?? '';
       state[1].name = action.payload["P2"]?.name;
+      state[1].socketId = action.payload["P2"]?.socketId ?? '';
       state[1].isPlaying = action.payload["P2"]?.isPlaying || false;
       state[2].name = action.payload["P3"]?.name;
+      state[2].socketId = action.payload["P3"]?.socketId ?? '';
       state[3].name = action.payload["P4"]?.name;
+      state[3].socketId = action.payload["P4"]?.socketId ?? '';
       state[3].isPlaying = action.payload["P4"]?.isPlaying || false;
     },
     updateTokenPosition: (state, action) => {

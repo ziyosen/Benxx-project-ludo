@@ -15,7 +15,7 @@ interface SquareMap {
 interface MoveInput { playerId: string; tokenId: string; };
 interface PlayerNames { [key: string]: string; };
 interface newPlayerData { name: string; isPlaying: boolean; };
-interface newPayers { [key: string]: newPlayerData; };
+interface newPlayers { [key: string]: newPlayerData; };
 type PlayerKey = keyof typeof laneData;
 
 
@@ -47,7 +47,7 @@ const squareMap: SquareMap = squareMapData;
 
 export const start = (playerNames: PlayerNames, numberOfPlayers: number) => (dispatch: AppDispatch) => {
 
-  let newPlayers: newPayers = {};
+  let newPlayers: newPlayers = {};
   let randomizePlayerTurn: string;
   newPlayers["P1"] = { "name": playerNames["P1"], "isPlaying": true };
   if (numberOfPlayers == 2) {
