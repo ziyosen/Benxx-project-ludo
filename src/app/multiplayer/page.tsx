@@ -17,7 +17,7 @@ const Multiplayer = () => {
     router.push(`/multiplayer/${roomId}`);
   };
 
-  const handleRoomIdChange = (e: any) => setRoomId(e.target.value);
+  const handleRoomIdChange = (e: any) => (setRoomId(e.target.value));
 
   return (
     <div className="md:h-screen flex flex-col justify-center items-center">

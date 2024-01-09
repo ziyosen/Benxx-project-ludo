@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type tokensOnBoard = {
   id: string,
@@ -60,21 +60,23 @@ export const gameSlice = createSlice({
     endGame: (state) => {
       state.gameStatus = 'end';
     },
-    diceRoll: (state) => {
-      let number = Math.floor(Math.random() * 6) + 1;
-      state.diceRoll = number;
+    setDiceRoll: (state, action) => {
+      state.diceRoll = action.payload;
       state.hasRolled = true;
-      if (number == 6)
+      if (action.payload == 6)
         state.isSix = true;
     },
-    passTurn: (state) => {
+    passTurn: (state, action: PayloadAction<string | undefined>) => {
       state.diceRoll = 0;
       state.hasRolled = false;
       state.isSix = false;
       state.isCapture = false;
-      state.currentTurn = calculateNextTurn(state);
+      if (action.payload)
+        state.currentTurn = action.payload;
+      else
+        state.currentTurn = calculateNextTurn(state);
     },
-    updateMoveStatus: (state) => {
+    updateMoveStatus: (state, action: PayloadAction<string | undefined>) => {
       state.diceRoll = 0;
       state.hasRolled = false;
       if (state.isSix)
@@ -82,7 +84,7 @@ export const gameSlice = createSlice({
       else if (state.isCapture)
         state.isCapture = false;
       else
-        state.currentTurn = calculateNextTurn(state);
+        state.currentTurn = action.payload ? action.payload! : calculateNextTurn(state);
     },
     updateCapture: (state) => {
       state.isCapture = true;
@@ -102,5 +104,5 @@ export const gameSlice = createSlice({
   }
 });
 
-export const { setNoOfPlayers, startGame, diceRoll, passTurn, updateMoveStatus, updateCapture, addTokenToBoardList, removeTokenFromBoardList, updateWinnerList, endGame } = gameSlice.actions;
+export const { setNoOfPlayers, startGame, setDiceRoll, passTurn, updateMoveStatus, updateCapture, addTokenToBoardList, removeTokenFromBoardList, updateWinnerList, endGame } = gameSlice.actions;
 export default gameSlice.reducer;

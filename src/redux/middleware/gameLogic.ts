@@ -1,6 +1,6 @@
-import { updateTokenPosition, setPlayers } from '../slices/player/index';
 import { RootState, AppDispatch } from '../store';
-import { setNoOfPlayers, startGame, updateWinnerList, passTurn, updateMoveStatus, updateCapture, addTokenToBoardList, removeTokenFromBoardList, endGame } from '../slices/game/index';
+import { updateTokenPosition, setPlayers } from '../slices/player/index';
+import { setNoOfPlayers, startGame, updateWinnerList, passTurn, updateMoveStatus, updateCapture, addTokenToBoardList, removeTokenFromBoardList, endGame, setDiceRoll } from '../slices/game/index';
 import * as squareMapData from '@/utils/SquareMap.json';
 
 interface SquareMap {
@@ -65,6 +65,11 @@ export const start = (playerNames: PlayerNames, numberOfPlayers: number) => (dis
   dispatch(setNoOfPlayers(numberOfPlayers));
   dispatch(setPlayers(newPlayers));
   dispatch(startGame(randomizePlayerTurn));
+};
+
+export const diceRoll = () => (dispatch: AppDispatch, getState: () => RootState) => {
+  const roll = Math.floor(Math.random() * 6) + 1;
+  dispatch(setDiceRoll(roll));
 };
 
 

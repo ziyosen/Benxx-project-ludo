@@ -10,7 +10,7 @@ import { Socket } from 'socket.io-client';
 import { BiRename } from "react-icons/bi";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks/hooks";
 import { start } from '@/redux/middleware/multiplayerLogic';
-import BoardLayout from '@/components/BoardLayout';
+import MultiplayerBoard from "@/components/multiplayer/MultiplayerBoard";
 
 
 interface roomProp {
@@ -73,7 +73,6 @@ const Room: React.FC<roomProp> = ({ params }) => {
     socket.on("log", (message: string) =>
       console.log(message));
 
-
     socket.on("connect", () => {
       console.log("Connected to server");
       setSocket(socket);
@@ -114,11 +113,6 @@ const Room: React.FC<roomProp> = ({ params }) => {
   }, [socket]);
 
 
-
-
-
-
-
   return (
     gameStatus === 'start' ?
       <div className="h-screen flex flex-col items-center justify-center">
@@ -131,7 +125,6 @@ const Room: React.FC<roomProp> = ({ params }) => {
         <h1 className="mt-16 text-2xl font-bold font-serif mb-5">Player List</h1>
         <PlayerList list={playerList} />
 
-        {/* {playersReady === 4 && ( */}
         {socket?.id === owner && playersReady === 4 && (
           <div className="mt-auto">
             <button
@@ -145,7 +138,7 @@ const Room: React.FC<roomProp> = ({ params }) => {
       </div>
       :
       <main className="flex justify-center items-center sm:scale-100 scale-50 w-full h-full">
-        <BoardLayout />
+        <MultiplayerBoard socket={socket!} />
       </main>
   );
 };

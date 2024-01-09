@@ -93,8 +93,13 @@ const playerSlice = createSlice({
       state[playerId.slice(1) - 1].tokens[id.slice(2) - 1].boardSquareId = boardSquareId;
       state[playerId.slice(1) - 1].tokens[id.slice(2) - 1].px = px;
       state[playerId.slice(1) - 1].tokens[id.slice(2) - 1].py = py;
+    },
+    setDisconnected: (state, action) => {
+      state[action.payload].socketId = "disconnected";
+      state[action.payload].isPlaying = false;
+      state[action.payload].name = "disconnected";
     }
   },
 });
-export const { updateTokenPosition, setPlayers } = playerSlice.actions;
+export const { updateTokenPosition, setPlayers, setDisconnected } = playerSlice.actions;
 export default playerSlice.reducer;
