@@ -50,6 +50,10 @@ const DynamicLudoBoard: React.FC<MultiplayerBoardProps> = ({ socket }) => {
     let token = player?.tokens.find((t) => t.id === tokenId);
     let locationStatus = token?.locationStatus;
 
+    if (player && player.socketId !== socket.id) {
+      return;
+    }
+
     if (!gameState.hasRolled) {
       return;
     }
@@ -63,7 +67,6 @@ const DynamicLudoBoard: React.FC<MultiplayerBoardProps> = ({ socket }) => {
     }
 
     moveToken = { "playerId": playerId, "tokenId": tokenId };
-
     socket.emit('moveToken', JSON.stringify(moveToken));
   };
 
@@ -91,16 +94,11 @@ const DynamicLudoBoard: React.FC<MultiplayerBoardProps> = ({ socket }) => {
   }, [socket]);
 
 
-
-
-
-
   const renderTokens = () => {
     return players.map((player) => (
       player.isPlaying && player.tokens.map((token) => {
 
         let highlightToken = '';
-
 
         if (gameState.currentTurn === socket.id && gameState.currentTurn === player.socketId && gameState.hasRolled) {
           if (gameState.diceRoll === 6) {
