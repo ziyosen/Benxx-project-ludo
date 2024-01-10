@@ -48,8 +48,8 @@ const Room: React.FC<roomProp> = ({ params }) => {
 
   const handleNameChange = (e: any) => {
     e.preventDefault();
-    setUserName(e.target.value);
-    socket?.emit('nameChange', e.target.value);
+    setUserName(e.target.value.substring(0, 15).trim());
+    socket?.emit('nameChange', e.target.value.substring(0, 15).trim());
   };
 
   const handleReady = (e: any) => {
