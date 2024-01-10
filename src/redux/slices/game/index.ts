@@ -6,6 +6,7 @@ type tokensOnBoard = {
 }[];
 
 interface GameState {
+  isMultiplayer: boolean;
   numberOfPlayers: number;
   currentTurn: string;
   diceRoll: number;
@@ -18,6 +19,7 @@ interface GameState {
 }
 
 const gameState: GameState = {
+  "isMultiplayer": false,
   "numberOfPlayers": 4,
   "currentTurn": "P1",
   "diceRoll": 0,
@@ -28,6 +30,7 @@ const gameState: GameState = {
   "winnerList": [],
   "gameStatus": 'start'
 };
+
 
 const calculateNextTurn = (state: GameState) => {
   let currentIndex = +state.currentTurn.slice(1);
@@ -54,6 +57,9 @@ export const gameSlice = createSlice({
       state.gameStatus = 'inPlay';
       state.currentTurn = action.payload;
     },
+    setMultiplayer: (state) => {
+      state.isMultiplayer = true;
+    },
     updateWinnerList: (state) => {
       state.winnerList.push(state.currentTurn);
     },
@@ -71,8 +77,9 @@ export const gameSlice = createSlice({
       state.hasRolled = false;
       state.isSix = false;
       state.isCapture = false;
-      if (action.payload)
+      if (action.payload) {
         state.currentTurn = action.payload;
+      }
       else
         state.currentTurn = calculateNextTurn(state);
     },
@@ -104,5 +111,5 @@ export const gameSlice = createSlice({
   }
 });
 
-export const { setNoOfPlayers, startGame, setDiceRoll, passTurn, updateMoveStatus, updateCapture, addTokenToBoardList, removeTokenFromBoardList, updateWinnerList, endGame } = gameSlice.actions;
+export const { setNoOfPlayers, setMultiplayer, startGame, setDiceRoll, passTurn, updateMoveStatus, updateCapture, addTokenToBoardList, removeTokenFromBoardList, updateWinnerList, endGame } = gameSlice.actions;
 export default gameSlice.reducer;
