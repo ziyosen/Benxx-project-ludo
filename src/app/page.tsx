@@ -31,12 +31,13 @@ const Home = () => {
             <StaticLudoBoard color={color} />
           </svg>
         </div>
-        <div className="flex flex-col lg:justify-center justify-between items-center lg:ml-52 lg:mr-auto font-bold font-mono mt-16 text-3xl h-96">
-          <Link href="/customize" className="mt-auto text-gray-800 mb-16 text-4xl hover:text-gray-900">
+        <div className="flex flex-col lg:justify-center justify-between items-center lg:ml-52 lg:mr-auto font-semibold font-mono lg:mt-0 mt-20 text-3xl h-96">
+          <Link href="/customize" className="mt-auto text-slate-800 mb-16 text-4xl hover:text-slate-950 hover:font-bold transition duration-300">
             Play
           </Link>
-          <Link href="/multiplayer" className="mt-auto text-gray-800 mb-16 text-3xl hover:text-gray-900">
+          <Link href="/multiplayer" className="mt-auto text-slate-800 mb-16 text-3xl hover:text-slate-950 hover:font-bold transition duration-300">
             Online Multiplayer
+            <span className="font-light text-xl"> (early beta)</span>
           </Link>
         </div>
       </main>

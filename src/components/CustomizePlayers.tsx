@@ -37,16 +37,16 @@ const CustomizePlayers = () => {
   return (
     <form className="flex flex-col items-center justify-center" id="playerNamesForm">
       <div className="mb-12 text-xl md:flex-row flex flex-col items-center">
-        <label className="font-mono mx-4 my-2" >
-          <input className="mx-2"
+        <label className="font-mono mx-4 my-2 hover:font-semibold cursor-pointer">
+          <input className="mx-2 w-4 h-4 hover:scale-125"
             type="radio"
             value="2"
             checked={numberOfPlayers === 2}
             onChange={() => handleNumberOfPlayersChange(2)} />
           Dice Duos!
         </label>
-        <label className="font-mono mx-4 my-4">
-          <input className="mx-2"
+        <label className="font-mono mx-4 my-4 hover:font-semibold cursor-pointer">
+          <input className="mx-2 w-4 h-4 hover:scale-125"
             type="radio"
             value="4"
             checked={numberOfPlayers === 4}
@@ -64,7 +64,7 @@ const CustomizePlayers = () => {
               placeholder={`Player ${index + 1}`}
               value={playerNames[`P${index + 1}`] || ''}
               onChange={(e) => handlePlayerNameChange(`P${index + 1}`, e.target.value)}
-              className="px-2 font-mono border rounded-md mx-8 h-12" />
+              className="px-2 font-mono border rounded-md mx-8 h-12 focus:outline-none focus:ring-4 focus:ring-sky-600" />
           </div>
         ))}
       </div>
