@@ -1,7 +1,7 @@
 import { Socket } from 'socket.io-client';
 import { RootState, AppDispatch } from '../store';
 import { setDisconnected, setPlayers, updateTokenPosition } from '../slices/player';
-import { startGame, updateWinnerList, passTurn, updateMoveStatus, updateCapture, addTokenToBoardList, removeTokenFromBoardList, endGame } from '../slices/game/index';
+import { startGame, updateWinnerList, passTurn, updateMoveStatus, updateCapture, addTokenToBoardList, removeTokenFromBoardList, endGame, setMultiplayer } from '../slices/game/index';
 import * as squareMapData from '@/utils/SquareMap.json';
 
 
@@ -58,6 +58,7 @@ export const start = (playerList: Player[], playerTurn: string) => (dispatch: Ap
   newPlayers["P4"] = { "name": playerList[3].name, "socketId": playerList[3].socketId, "isPlaying": true };
 
   dispatch(setPlayers(newPlayers));
+  dispatch(setMultiplayer());
   dispatch(startGame(playerTurn));
 };
 
@@ -68,26 +69,25 @@ interface UserItem {
 
 
 export const inPlayUserDisconnect = (userList: string) => (dispatch: AppDispatch, getState: () => RootState) => {
-
   const state = getState();
   const users: UserItem[] = JSON.parse(userList);
   const currentTurn = state.gameState.currentTurn;
 
   let currentIndex = state.players.findIndex(p => p.socketId === currentTurn);
-  console.log("inPlayUserDisconnect");
-  console.log("currentIndex");
-  console.log(currentIndex);
-
+  let countDisc = 0;
 
   const socketIdList: string[] = [];
 
   for (let i = 0; i < users.length; i++) {
     socketIdList.push(users[i].socketId);
-    if (users[i].socketId === 'disconnected')
+    if (users[i].socketId === "disconnected") {
+      countDisc++;
       dispatch(setDisconnected(i));
+    }
   }
 
-  console.log(socketIdList);
+  if (countDisc == 3)
+    dispatch(endGame());
 
   if (socketIdList[currentIndex] === "disconnected") {
     let nextIndex = (currentIndex + 1) % 4;
