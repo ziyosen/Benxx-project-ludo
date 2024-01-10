@@ -11,6 +11,7 @@ import { BiRename } from "react-icons/bi";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks/hooks";
 import { start } from '@/redux/middleware/multiplayerLogic';
 import MultiplayerBoard from "@/components/multiplayer/MultiplayerBoard";
+import { FaRegCircleCheck, FaCircleCheck } from "react-icons/fa6";
 
 
 interface roomProp {
@@ -28,16 +29,22 @@ interface Player {
 const Room: React.FC<roomProp> = ({ params }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { room } = params;
 
   const gameStatus = useAppSelector((state) => state.gameState.gameStatus);
 
-  const { room } = params;
   const [socket, setSocket] = useState<Socket>();
   const [userName, setUserName] = useState<string>('');
   const [owner, setOwner] = useState<string>('');
+  const [ready, setReady] = useState(false);
   const [playersReady, setPlayersReady] = useState<number>(0);
   const [playerList, setPlayerList] = useState<Player[]>([]);
   const playerListRef = useRef<Player[]>([]);
+  const readyRef = useRef<number>(Number(ready));
+
+
+
+  const startVisible = (socket?.id === owner && playersReady === 4) ? "" : "invisible";
 
   const handleNameChange = (e: any) => {
     e.preventDefault();
@@ -47,8 +54,9 @@ const Room: React.FC<roomProp> = ({ params }) => {
 
   const handleReady = (e: any) => {
     e.preventDefault();
-    console.log("handle ready");
-    socket?.emit('ready');
+    readyRef.current = 1;
+    setReady(true);
+    socket?.emit('ready', 1);
   };
 
   const handleStart = (e: any) => {
@@ -100,12 +108,12 @@ const Room: React.FC<roomProp> = ({ params }) => {
     socket.on('userListChange', (userList) => {
       setPlayerList(JSON.parse(userList));
       playerListRef.current = JSON.parse(userList);
+      socket.emit('ready', Number(readyRef.current));
     });
 
     socket?.on('start', (playerTurn: string) => {
       dispatch(start(playerListRef.current, playerTurn));
     });
-
 
     return () => {
       socket.disconnect();
@@ -113,38 +121,39 @@ const Room: React.FC<roomProp> = ({ params }) => {
   }, [socket]);
 
 
+  const inputNameCSS = ready ? 'font-bold ring-2 ring-blue-500' : 'focus-within:border-amber-800 focus-within:ring-2 focus-within:ring-amber-500 focus-within:text-amber-800';
+
+
   return (
     gameStatus === 'start' ?
       <div className="h-screen flex flex-col items-center justify-center">
-        <h1 className="mt-auto text-4xl font-bold font-serif mb-5">Lobby</h1>
-        <div className="mt-8 flex items-center rounded-lg border-2 border-black focus-within:border-amber-800 focus-within:ring-2 focus-within:ring-amber-500 focus-within:text-amber-800 h-12">
-          <div className="mx-2 text-4xl"><BiRename /></div>
-          <input className="mx-2 px-4 text-lg w-36 rounded-lg focus:outline-none font-semibold bg-transparent" type="text" value={userName} onChange={handleNameChange} />
-        </div>
-        <button onClick={handleReady} className="mt-14 text-2xl font-bold font-mono">Ready</button>
-        <h1 className="mt-16 text-2xl font-bold font-serif mb-5">Player List</h1>
-        <PlayerList list={playerList} />
-
-        {socket?.id === owner && playersReady === 4 && (
-          <div className="mt-auto">
-            <button
-              onClick={handleStart}
-              className={`p-4 border-orange-700 bg-amber-500 text-slate-900 text-2xl font-mono font-semibold rounded-xl shadow-lg hover:shadow-md`}>
-              Start
-            </button>
+        <h1 className="mt-auto text-6xl font-bold font-serif mb-10">Dice-y Gathering</h1>
+        <div className="flex items-center justify-center">
+          <div className={`mt-8 flex items-center rounded-lg border-2 border-black h-12 ${inputNameCSS}`}>
+            <div className="px-2 text-4xl"><BiRename /></div>
+            <input className="mx-2 px-2 text-lg w-32 rounded-lg focus:outline-none font-mono bg-transparent" type="text" value={userName} onChange={handleNameChange} disabled={ready} />
           </div>
-        )}
+          {ready ? <div className="mt-8 mx-4 text-4xl text-blue-600"><FaCircleCheck /></div> :
+            <button onClick={handleReady} disabled={ready} className="mt-8 mx-4 text-4xl text-yellow-500 "><FaRegCircleCheck /></button>
+          }
+        </div>
+        <h1 className="mt-12 text-2xl font-bold font-serif mb-5">Player List</h1>
+        <PlayerList list={playerList} />
+        <div className={`mt-12 ${startVisible}`}>
+          <button
+            onClick={handleStart}
+            className={`p-4 border-orange-700 bg-amber-500 text-slate-900 text-2xl font-mono font-semibold rounded-xl shadow-lg hover:shadow-md`}>
+            Start
+          </button>
+        </div>
         <Footer />
-      </div>
+      </div >
       :
       <main className="flex justify-center items-center sm:scale-100 scale-50 w-full h-full">
         <MultiplayerBoard socket={socket!} />
       </main>
   );
 };
-
-
-
 
 
 const Page = ({ params }: roomProp) => (
