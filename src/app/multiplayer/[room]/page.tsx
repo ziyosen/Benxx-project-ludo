@@ -43,7 +43,7 @@ const Room: React.FC<roomProp> = ({ params }) => {
   const playerListRef = useRef<Player[]>([]);
   const readyRef = useRef<number>(Number(ready));
 
-
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL!;
 
   const startVisible = (socket?.id === owner && playersReady === 4) ? "" : "invisible";
 
@@ -75,7 +75,8 @@ const Room: React.FC<roomProp> = ({ params }) => {
 
   useEffect(() => {
     if (!socket) {
-      setSocket(io("https://5eb28475-c4a8-41c1-8d08-28f4ed6d5e91-00-1vqejcytggvx4.janeway.replit.dev", {
+      console.log(serverUrl);
+      setSocket(io(serverUrl, {
         transports: ['websocket']
       }));
     }
