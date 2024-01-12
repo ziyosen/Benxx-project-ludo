@@ -19,11 +19,6 @@ const Dice: React.FC<DiceProps> = ({ socketId, socket }) => {
   const dispatch = useAppDispatch();
   const [isRolling, setIsRolling] = useState(false);
   const [rollingDice, setRollingDice] = useState(0);
-  let diceCursorClass = (currentTurn === socket.id) ? 'cursor-pointer' : 'cursor-not-allowed';
-  let diceRollCursorClass = 'cursor-not-allowed';
-  if (currentTurn === socket.id)
-    diceRollCursorClass = (isRolling || hasRolled) ? 'cursor-not-allowed' : 'cursor-pointer';
-  let passTurnClass = isRolling ? 'cursor-not-allowed' : 'cursor-pointer';
 
 
 
@@ -72,11 +67,23 @@ const Dice: React.FC<DiceProps> = ({ socketId, socket }) => {
   };
 
   const diceIcons = [<FaDiceD6 />, <FaDiceOne />, <FaDiceTwo />, <FaDiceThree />, <FaDiceFour />, <FaDiceFive />, <FaDiceSix />];
+
+  const diceCursorClass = (currentTurn === socket.id) ? 'cursor-pointer' : 'cursor-not-allowed';
+
+  let diceRollCursorClass = 'cursor-not-allowed';
+  if (currentTurn === socket.id)
+    diceRollCursorClass = (isRolling || hasRolled) ? 'cursor-not-allowed' : 'cursor-pointer';
+
+  const passTurnClass = isRolling ? 'cursor-not-allowed' : 'cursor-pointer';
+
   const common_CSS = "border-2 rounded-2xl shadow-lg shadow-slate-700 transition-all duration-400 ease-in-out hover:shadow-md";
+
+  const breathingAnim = (socket.id === currentTurn && socketId === currentTurn) ? 'breathingAnim' : '';
+
 
   return (
     <>
-      <button className={`mx-3 w-20 h-20 bg-slate-600 text-white ${common_CSS} ${diceRollCursorClass} ${diceCursorClass} hover:bg-slate-700`}
+      <button className={`mx-3 w-20 h-20 text-white ${breathingAnim} ${common_CSS} ${diceRollCursorClass} ${diceCursorClass} hover:opacity-80 bg-slate-600`}
         onClick={handleDiceClick}
         disabled={isRolling || hasRolled || (currentTurn !== socket.id)}>
         <span className="flex justify-center text-6xl">

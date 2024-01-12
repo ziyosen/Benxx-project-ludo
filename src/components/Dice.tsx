@@ -15,8 +15,7 @@ const Dice: React.FC<DiceProps> = ({ playerId }) => {
   const dispatch = useAppDispatch();
   const [isRolling, setIsRolling] = useState(false);
   const [rollingDice, setRollingDice] = useState(0);
-  let diceCursorClass = (isRolling || hasRolled) ? 'cursor-not-allowed' : 'cursor-pointer';
-  let passTurnClass = isRolling ? 'cursor-not-allowed' : 'cursor-pointer';
+
 
   const handleDiceClick = () => {
     if (!hasRolled) {
@@ -44,9 +43,16 @@ const Dice: React.FC<DiceProps> = ({ playerId }) => {
 
   const common_CSS = "border-2 rounded-2xl shadow-lg shadow-slate-700 transition-all duration-400 ease-in-out hover:shadow-md";
 
+  const diceCursorClass = (isRolling || hasRolled) ? 'cursor-not-allowed' : 'cursor-pointer';
+
+  const passTurnClass = isRolling ? 'cursor-not-allowed' : 'cursor-pointer';
+
+  const breathingAnim = (playerId === currentTurn) ? 'breathingAnim' : '';
+
+
   return (
     <>
-      <button className={`mx-3 w-20 h-20 bg-slate-600 text-white ${common_CSS} ${diceCursorClass} hover:bg-slate-700`}
+      <button className={`mx-3 w-20 h-20 bg-slate-600 text-white ${breathingAnim} ${common_CSS} ${diceCursorClass} hover:bg-slate-700`}
         onClick={handleDiceClick}
         disabled={isRolling || hasRolled}>
         <span className="flex justify-center text-6xl">
