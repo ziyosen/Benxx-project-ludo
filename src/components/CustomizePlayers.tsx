@@ -1,8 +1,9 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch } from "@/redux/hooks/hooks";
 import { start } from '@/redux/middleware/gameLogic';
+import { resetGameState } from '@/redux/slices/game';
 
 interface PlayerNames { [key: string]: string; };
 
@@ -11,6 +12,10 @@ const CustomizePlayers = () => {
   const [numberOfPlayers, setNumberOfPlayers] = useState(2);
   const [playerNames, setPlayerNames] = useState<PlayerNames>({});
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(resetGameState());
+  }, []);
 
   const handleNumberOfPlayersChange = (num: number) => {
     setNumberOfPlayers(num);

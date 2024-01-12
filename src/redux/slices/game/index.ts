@@ -50,6 +50,8 @@ export const gameSlice = createSlice({
   name: 'gameState',
   initialState: gameState,
   reducers: {
+    resetGameState: () => gameState,
+
     setNoOfPlayers: (state, action) => {
       state.numberOfPlayers = action.payload;
     },
@@ -111,5 +113,5 @@ export const gameSlice = createSlice({
   }
 });
 
-export const { setNoOfPlayers, setMultiplayer, startGame, setDiceRoll, passTurn, updateMoveStatus, updateCapture, addTokenToBoardList, removeTokenFromBoardList, updateWinnerList, endGame } = gameSlice.actions;
+export const { resetGameState, setNoOfPlayers, setMultiplayer, startGame, setDiceRoll, passTurn, updateMoveStatus, updateCapture, addTokenToBoardList, removeTokenFromBoardList, updateWinnerList, endGame } = gameSlice.actions;
 export default gameSlice.reducer;
