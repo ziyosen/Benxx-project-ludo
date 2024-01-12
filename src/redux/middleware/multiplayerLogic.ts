@@ -48,7 +48,6 @@ const squareMap: SquareMap = squareMapData;
 
 export const start = (playerList: Player[], playerTurn: string) => (dispatch: AppDispatch) => {
 
-  console.log(playerList);
 
   let newPlayers: newPlayers = {};
 

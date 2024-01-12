@@ -75,7 +75,6 @@ const Room: React.FC<roomProp> = ({ params }) => {
 
   useEffect(() => {
     if (!socket) {
-      console.log(serverUrl);
       setSocket(io(serverUrl, {
         transports: ['websocket']
       }));

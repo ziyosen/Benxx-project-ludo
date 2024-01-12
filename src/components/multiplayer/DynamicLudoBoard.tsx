@@ -83,7 +83,6 @@ const DynamicLudoBoard: React.FC<MultiplayerBoardProps> = ({ socket }) => {
     });
 
     socket.on("inPlayUserDisconnect", (userList: string) => {
-      console.log(userList);
       dispatch(inPlayUserDisconnect(userList));
     });
 
