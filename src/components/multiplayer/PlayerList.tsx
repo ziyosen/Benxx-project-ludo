@@ -13,7 +13,7 @@ const PlayerList: React.FC<PlayerListProps> = ({ list }) => {
       {
         list && list.map((item) =>
           <div key={item.socketId}>
-            <span className="m-2 p-2 h-5 text-xl font-mono">
+            <span className="m-2 p-2 h-5 text-xl font-mono text-slate-800">
               {item.name}
             </span>
           </div>

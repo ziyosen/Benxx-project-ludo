@@ -1,14 +1,23 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from '@/components/Footer';
 import { useRouter } from 'next/navigation';
 import { TiTick } from "react-icons/ti";
+import { store } from '@/redux/store';
+import { Provider } from 'react-redux';
+import { useAppDispatch } from '@/redux/hooks/hooks';
+import { resetGameState } from '@/redux/slices/game';
 
 
 const Multiplayer = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const [showInput, setShowInput] = useState('invisible');
   const [roomId, setRoomId] = useState('');
-  const router = useRouter();
+
+  useEffect(() => {
+    dispatch(resetGameState());
+  }, []);
 
   const handleCreateRoom = () => {
     const roomId = new Date().getTime().toString().slice(5);
@@ -19,19 +28,19 @@ const Multiplayer = () => {
     router.push(`/multiplayer/${roomId}`);
   };
 
-  const handleRoomIdChange = (e: any) => (setRoomId(e.target.value.substring(0, 15).trim()));
+  const handleRoomIdChange = (e: any) => (setRoomId(e.target.value.substring(0, 14).trim()));
 
   return (
-    <div className="h-screen flex flex-col items-center">
-      <h2 className="mt-auto my-12 py-4 px-4 text-5xl font-bold font-serif text-slate-900 text-center">
+    <div className="h-screen overflow-y-auto flex flex-col items-center justify-center">
+      <h2 className="mt-auto py-4 px-4 text-5xl font-bold font-serif text-slate-900 text-center">
         Multiplayer Rooms
       </h2>
-      <div className="flex flex-col items-center justify-evenly">
-        <div className="mb-12 text-2xl md:flex-row flex flex-col items-center gap-x-12 gap-y-4 text-slate-800">
+      <div className="mt-12 flex flex-col items-center justify-center">
+        <div className="mb-8 text-2xl md:flex-row flex flex-col items-center gap-x-12 gap-y-4 text-slate-800">
           <button onClick={handleCreateRoom} className="font-mono my-2 hover:text-slate-900 hover:font-semibold">
             Create Room
           </button>
-          <button onClick={() => setShowInput('visible')} className="font-mono my-4 hover:text-slate-900 hover:font-semibold">
+          <button onClick={() => setShowInput('visible')} className="font-mono my-2 hover:text-slate-900 hover:font-semibold">
             Join Room
           </button>
         </div>
@@ -45,4 +54,10 @@ const Multiplayer = () => {
   );
 };
 
-export default Multiplayer;
+const Page = () => (
+  <Provider store={store}>
+    <Multiplayer />
+  </Provider>
+);
+
+export default Page;

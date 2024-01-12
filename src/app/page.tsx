@@ -37,7 +37,7 @@ const Home = () => {
           </Link>
           <Link href="/multiplayer" className="mt-auto text-slate-800 mb-16 text-3xl hover:text-slate-950 hover:font-bold transition duration-300">
             Online Multiplayer
-            <span className="font-light text-xl"> (early beta)</span>
+            <span className="font-light text-xl"> (beta)</span>
           </Link>
         </div>
       </main>
