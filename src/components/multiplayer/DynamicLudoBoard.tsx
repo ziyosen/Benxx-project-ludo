@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { Socket } from "socket.io-client";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks/hooks";
@@ -32,6 +32,7 @@ const DynamicLudoBoard: React.FC<MultiplayerBoardProps> = ({ socket }) => {
   let moveToken: MoveToken = { "playerId": '', "tokenId": '' };
   const dispatch = useAppDispatch();
 
+  const [tokenClicked, setTokenClicked] = useState(false);
 
   useEffect(() => {
     if (gameStatus === 'start') {
@@ -50,6 +51,10 @@ const DynamicLudoBoard: React.FC<MultiplayerBoardProps> = ({ socket }) => {
     let token = player?.tokens.find((t) => t.id === tokenId);
     let locationStatus = token?.locationStatus;
 
+    if (tokenClicked) {
+      return;
+    }
+
     if (player && player.socketId !== socket.id) {
       return;
     }
@@ -66,6 +71,8 @@ const DynamicLudoBoard: React.FC<MultiplayerBoardProps> = ({ socket }) => {
       return;
     }
 
+    setTokenClicked(true);
+
     moveToken = { "playerId": playerId, "tokenId": tokenId };
     socket.emit('moveToken', JSON.stringify(moveToken));
   };
@@ -75,10 +82,13 @@ const DynamicLudoBoard: React.FC<MultiplayerBoardProps> = ({ socket }) => {
     socket.on('moveToken', (moveToken) => {
       try {
         dispatch(calculateAndMove(socket, JSON.parse(moveToken)));
+        setTokenClicked(false);
       }
       catch (e) {
-        if (socket.id === gameState.currentTurn)
+        if (socket.id === gameState.currentTurn) {
           alert(e);
+          setTokenClicked(false);
+        }
       }
     });
 
