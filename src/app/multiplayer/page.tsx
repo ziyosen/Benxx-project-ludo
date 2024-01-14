@@ -15,8 +15,22 @@ const Multiplayer = () => {
   const [showInput, setShowInput] = useState('invisible');
   const [roomId, setRoomId] = useState('');
 
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL!;
+
   useEffect(() => {
     dispatch(resetGameState());
+
+    // * Trigger wake-up signal for the Server hosted on Glitch
+    const checkServerStatus = async () => {
+      try {
+        const serverResponse = await fetch(serverUrl);
+        const result = await serverResponse.json();
+        console.log(result);
+      } catch (error) {
+        console.error('Error connecting to server:', error);
+      }
+    };
+    checkServerStatus();
   }, []);
 
   const handleCreateRoom = () => {
