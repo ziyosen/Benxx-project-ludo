@@ -7,6 +7,7 @@ import { store } from '@/redux/store';
 import { Provider } from 'react-redux';
 import { useAppDispatch } from '@/redux/hooks/hooks';
 import { resetGameState } from '@/redux/slices/game';
+import { resetPlayerState } from '@/redux/slices/player';
 
 
 const Multiplayer = () => {
@@ -19,6 +20,7 @@ const Multiplayer = () => {
 
   useEffect(() => {
     dispatch(resetGameState());
+    dispatch(resetPlayerState());
 
     // * Trigger wake-up signal for the Server hosted on Glitch
     const checkServerStatus = async () => {

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useAppDispatch } from "@/redux/hooks/hooks";
 import { start } from '@/redux/middleware/gameLogic';
 import { resetGameState } from '@/redux/slices/game';
+import { resetPlayerState } from '@/redux/slices/player';
 
 interface PlayerNames { [key: string]: string; };
 
@@ -15,6 +16,7 @@ const CustomizePlayers = () => {
 
   useEffect(() => {
     dispatch(resetGameState());
+    dispatch(resetPlayerState());
   }, []);
 
   const handleNumberOfPlayersChange = (num: number) => {

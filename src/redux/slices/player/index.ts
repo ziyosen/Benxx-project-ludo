@@ -75,6 +75,8 @@ const playerSlice = createSlice({
   name: 'players',
   initialState: playerState,
   reducers: {
+    resetPlayerState: () => playerState,
+
     setPlayers: (state, action) => {
       state[0].name = action.payload["P1"]?.name;
       state[0].socketId = action.payload["P1"]?.socketId ?? '';
@@ -101,5 +103,5 @@ const playerSlice = createSlice({
     }
   },
 });
-export const { updateTokenPosition, setPlayers, setDisconnected } = playerSlice.actions;
+export const { resetPlayerState, updateTokenPosition, setPlayers, setDisconnected } = playerSlice.actions;
 export default playerSlice.reducer;
