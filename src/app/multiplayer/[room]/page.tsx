@@ -96,7 +96,7 @@ const Room: React.FC<roomProp> = ({ params }) => {
     });
 
     socket.on("connect_error", (e: any) =>
-      alert("Connection failed."));
+      alert(`Connection failed. Please wait for server to boot up.\nOr visit ${serverUrl} for server status.`));
 
     socket.on("roomFull", (message: string) => {
       alert(message);
