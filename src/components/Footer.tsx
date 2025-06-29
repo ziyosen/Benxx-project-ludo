@@ -1,9 +1,8 @@
+import StrangeQuarkIcon from '@/assets/StrangeQuarkIcon';
 import React from 'react';
 import Link from 'next/link';
 import { FaXTwitter } from "react-icons/fa6";
-import { SiNextdotjs, SiRedux, SiGithub, SiTelegram } from "react-icons/si";
-import StrangeQuarkIcon from '@/assets/StrangeQuarkIcon';
-import BenxxProject from '@/components/BenxxProject'; // Pastikan path-nya sesuai
+import { SiNextdotjs, SiRedux, SiGithub, SiInstagram } from "react-icons/si";
 
 const Footer = React.memo(() => {
   return (
@@ -11,7 +10,7 @@ const Footer = React.memo(() => {
       <div className="flex flex-col gap-y-6 lg:flex-row justify-center items-center font-bold font-mono text-xl text-gray-800">
         <div className="flex items-center mx-auto">
           <p className="mx-2">Developed by:</p>
-          <p className="mx-2"><BenxxProject /></p>
+          <p className="mx-2"><StrangeQuarkIcon /></p>
         </div>
         <div className="flex items-center mx-auto">
           <p className="mx-2">Powered by:</p>
