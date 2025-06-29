@@ -2,7 +2,7 @@ import StrangeQuarkIcon from '@/assets/StrangeQuarkIcon';
 import React from 'react';
 import Link from 'next/link';
 import { FaXTwitter } from "react-icons/fa6";
-import { SiNextdotjs, SiRedux, SiGithub, SiInstagram } from "react-icons/si";
+import { SiNextdotjs, SiRedux, SiGithub, SiTelegram } from "react-icons/si";
 
 const Footer = React.memo(() => {
   return (
