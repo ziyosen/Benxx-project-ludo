@@ -10,7 +10,7 @@ const Footer = React.memo(() => {
       <div className="flex flex-col gap-y-6 lg:flex-row justify-center items-center font-bold font-mono text-xl text-gray-800">
         <div className="flex items-center mx-auto">
           <p className="mx-2">Developed by:</p>
-          <p className="mx-2"><Benxx /></p>
+          <p className="mx-2"><ziyosen /></p>
         </div>
         <div className="flex items-center mx-auto">
           <p className="mx-2">Powered by:</p>
