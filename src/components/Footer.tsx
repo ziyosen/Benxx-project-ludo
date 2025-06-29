@@ -23,9 +23,7 @@ const Footer = React.memo(() => {
         </div>
         <div className="flex items-center mx-auto">
           <p className="mx-2">Socials:</p>
-          <p className="mx-2"><Link href="https://t.me/Bleszh"><SiTelegram /></Link></p>
-          <p className="mx-2"><Link href=""><SiInstagram /></Link></p>
-          <p className="mx-2"><Link href=""><FaXTwitter /></Link></p>
+          <p className="mx-2"><Link href="https://t.me/Bleszh"><SiTelegram /></Link></p
         </div>
       </div>
     </footer>
