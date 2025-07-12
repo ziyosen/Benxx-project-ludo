@@ -2,7 +2,7 @@ import StrangeQuarkIcon from '@/assets/StrangeQuarkIcon';
 import React from 'react';
 import Link from 'next/link';
 import { FaXTwitter } from "react-icons/fa6";
-import { SiNextdotjs, SiRedux, SiGithub, SiTelegram } from "react-icons/si";
+import { SiNextdotjs, SiRedux, SiTelegram } from "react-icons/si";
 
 const Footer = React.memo(() => {
   return (
@@ -20,7 +20,6 @@ const Footer = React.memo(() => {
         <div className="flex items-center mx-auto">
           <p className="mx-2">Peek Behind the Squares:</p>
           <p className="mx-2 text-2xl">
-            <Link href="https://github.com/ziyosen/Benxx-project-ludo"><SiGithub /></Link>
           </p>
         </div>
         <div className="flex items-center mx-auto">
